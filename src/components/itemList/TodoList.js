@@ -42,10 +42,14 @@ function TodoList() {
     }
 
   return (
-    <div>
-        <h1>Whats up today?</h1>
-        <TodoForm onSubmit={addTodo} />
-        <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo}/>
+    <div style={{flex:"auto"}}>
+        <div style={{flexDirection:"column", display:"flex"}}> 
+            <h1 class="text-center mb-1">Whats up today?</h1>
+            <TodoForm onSubmit={addTodo} />
+        </div>  
+        <div>
+            <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo}/>
+        </div>
     </div>
   );
 }
