@@ -18,14 +18,15 @@ function TodoForm(props) {
 
         props.onSubmit({
             id: Math.floor(Math.random() * 10000),
-            text: input
+            text: input,
+            active: true
         });
-
         setInput('');
     };
 
+
     return (
-        <form onSubmit={handleSubmit} class="bg-white" style={{flex:"auto", flexDirection:"row", display:"flex"}}>
+        <form onSubmit={handleSubmit} class="bg-white" style={{flex:"auto", flexDirection:"row", display:"flex", width:"15.5vw"}}>
             {props.edit ? ( 
             <>
                 <input
@@ -50,7 +51,7 @@ function TodoForm(props) {
                     name='text'
                     onChange={handleChange}
                     ref={inputRef}
-                    style={{width:"15vw"}}
+                    style={{width:"15vw"}}                
                 /> 
             </div>
                  <button class="border border-rounded mx-2 bg-white">Add</button>
