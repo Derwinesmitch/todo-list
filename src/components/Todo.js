@@ -43,7 +43,7 @@ function Todo({todos, completeTodo, removeTodo, updateTodo}) {
               <div class="mt-1.5 bg-white flex flex-row justify-between break-all"> 
                <div key={index} class=" bg-white pl-1.5" style={{width:"15.5vw"}}>
                     <div key={todo.id} onClick={() => stateHandler(todo.id)} >
-                        {JSON.stringify(todo.active)}
+                        {todo.text}
                     </div>
                 </div>  
                 <div class="mt-1.5 bg-white flex items-center" >

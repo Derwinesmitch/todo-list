@@ -29,15 +29,17 @@ function TodoForm(props) {
         <form onSubmit={handleSubmit} class="bg-white" style={{flex:"auto", flexDirection:"row", display:"flex", width:"15.5vw"}}>
             {props.edit ? ( 
             <>
-                <input
-                    type="text"
-                    placeholder="Update item"
-                    value={input}
-                    name='text'
-                    onChange={handleChange}
-                    ref={inputRef}
-                    style={{width:"15vw"}}
-                /> 
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Update item"
+                        value={input}
+                        name='text'
+                        onChange={handleChange}
+                        ref={inputRef}
+                        style={{width:"15vw"}}
+                    /> 
+                </div>
             <button class="border border-rounded mx-2 bg-white">Update</button>
             </>
             ) :
