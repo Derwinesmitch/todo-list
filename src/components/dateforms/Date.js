@@ -10,18 +10,19 @@ function DateBox () {
     const optionsDay = { weekday: "long" };
     const month = NewDate.getMonth();   
     const optionsMonth = { month: "long" };
-    // const dayDate = NewDate.getDate();   
+    const dayNum = NewDate.getDate();
+
 
 return (
     <div>
         <div class="flex">
             <DayBox NewDate={NewDate} day={day} optionsDay={optionsDay} />
-            <DayNumber NewDate={NewDate} day={day}/>
+            <DayNumber NewDate={NewDate} dayNum={dayNum}/>
         </div>
         <div>
             <MonthBox NewDate={NewDate} month={month} optionsMonth={optionsMonth}/>
         </div>
-            <Calendar />
+            <Calendar/>
     </div>
 
   );

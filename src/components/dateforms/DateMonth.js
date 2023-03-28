@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
 function MonthBox ({NewDate, month, optionsMonth}) {
-const [dateState, setDateState] = useState ()
 
 
 return (
