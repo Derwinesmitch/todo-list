@@ -7,6 +7,7 @@ function DayNumber ({NewDate, dayNum}) {
 return (
     <div >
         {dayNum}
+        
     </div>
   );
 }

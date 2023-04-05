@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
-function DayBox ({NewDate, optionsDay}) {
+function DayBox ({NewDate, optionsDay, onClick}) {
+
 
 
 return (
-    <div class="mr-1">
+    <div class="mr-1" onClick={onClick}>
         {new Intl.DateTimeFormat("en-US", optionsDay).format(NewDate)}
     </div>
   );
