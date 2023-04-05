@@ -23,9 +23,7 @@ function Todo({todos, completeTodo, removeTodo, updateTodo}) {
     }
 
     const stateHandler = (id) => {
-        debugger
         todos.filter(e => {
-         debugger
             if (id ==e.id){
                 e.active=!e.active
             } 

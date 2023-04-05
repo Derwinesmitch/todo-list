@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
+import '../../datepickerstyle.css';
 
-import "react-datepicker/dist/react-datepicker.css"
 
 
 
@@ -21,12 +21,13 @@ function Calendar ({changeDate, onShowCalendar, NewDate}) {
     },[onShowCalendar])
 
     return (
-      <div> 
+      <div className="hideInput"> 
         <DatePicker selected={startDate} onChange={(date) => {
           setStartDate(date)
           console.log(date)
           }}
           open={onShowCalendar}
+          className="hideDatepicker"
           />
       </div>
       
