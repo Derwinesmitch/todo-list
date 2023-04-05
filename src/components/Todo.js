@@ -14,6 +14,7 @@ function Todo({todos, completeTodo, removeTodo, updateTodo}) {
 
         }, [todos])
 
+        
     const submitUpdate = value => { 
         updateTodo(edit.id, value)
         setEdit({
@@ -22,26 +23,29 @@ function Todo({todos, completeTodo, removeTodo, updateTodo}) {
         })
     }
 
-    const stateHandler = (id) => {
-        todos.filter(e => {
-            if (id ==e.id){
-                e.active=!e.active
-            } 
-        })     
-        setTodosState(todos)
-    }
     if (edit.id) {
         return <TodoForm edit={edit} onSubmit={submitUpdate} />;
     } 
 
+    const onChangeState = (id) => {
+       
+    todosState.map(e => {
+        if(e.id===id) {
+            e.active=!e.active
+        }
+    })
+    setTodosState(todosState)
+    }
+    
 
     return (
         <>
            {todosState && todosState.map((todo, index) => (
               <div class="mt-1.5 bg-white flex flex-row justify-between break-all"> 
                <div key={index} class=" bg-white pl-1.5" style={{width:"15.5vw"}}>
-                    <div key={todo.id} onClick={() => stateHandler(todo.id)} >
-                        {todo.text}
+                    <div key={todo.id} >
+                        <input type="checkbox" onChange={() => onChangeState(todo.id)} defaultChecked={todo.active}/>
+                    {todo.text}
                     </div>
                 </div>  
                 <div class="mt-1.5 bg-white flex items-center" >

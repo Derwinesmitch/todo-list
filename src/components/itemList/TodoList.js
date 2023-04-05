@@ -5,6 +5,7 @@ function TodoList() {
     const [todos, setTodos] = useState([]);
 
     const addTodo = todo => {
+        debugger
         if(!todo.text || /^\s*$/.test(todo.text)) {
             return;
         }
@@ -30,24 +31,16 @@ function TodoList() {
     }
 
 
-    const completeTodo = id => {
-        let updatedTodos = todos.map(todo => {
-            if (todo.id === id) {
-                todo.isComplete = !todo.isComplete;
-            }
-            return todo;
-        });
-        setTodos(updatedTodos);
-    }
+
 
   return (
     <div style={{flex:"auto"}}>
         <div style={{flexDirection:"column", display:"flex"}}> 
             <h1 class="text-center mb-1">Whats up today?</h1>
-            <TodoForm onSubmit={addTodo} />
+            <TodoForm onSubmit={addTodo}/>
         </div>  
         <div>
-            <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo}/>
+            <Todo todos={todos} removeTodo={removeTodo} updateTodo={updateTodo}/>
         </div>
     </div>
   );
