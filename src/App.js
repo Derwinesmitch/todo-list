@@ -3,14 +3,10 @@ import Container from './components/container';
 
 function App() {
 
-  
-
   return (
     <div>
       <Container />
-
     </div>
-    
   );
 }
 

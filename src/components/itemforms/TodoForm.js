@@ -26,7 +26,7 @@ function TodoForm(props) {
 
 
     return (
-        <form onSubmit={handleSubmit} class="bg-white" style={{flex:"auto", flexDirection:"row", display:"flex", width:"15.5vw"}}>
+        <form onSubmit={handleSubmit} style={{flex:"auto", flexDirection:"row", display:"flex", width:"15.5vw"}}>
             {props.edit ? ( 
             <>
                 <div>
@@ -40,7 +40,7 @@ function TodoForm(props) {
                         style={{width:"15vw"}}
                     /> 
                 </div>
-            <button class="border border-rounded mx-2 bg-white">Update</button>
+            <button class="border border-rounded mx-2 bg-brightyelloworange">Update</button>
             </>
             ) :
             ( 
@@ -56,7 +56,7 @@ function TodoForm(props) {
                     style={{width:"15vw"}}                
                 /> 
             </div>
-                 <button class="border border-rounded mx-2 bg-white">Add</button>
+                 <button class="border border-rounded mx-2 bg-brightyelloworange">Add</button>
 
             </>
             )

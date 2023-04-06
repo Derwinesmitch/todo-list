@@ -4,14 +4,10 @@ import DayBox from './DateDay';
 import DayNumber from './DateNumber';
 import Calendar from './DatePicker';
 
-
-
-
-
 function DateBox () {
     const [showCalendar, setShowCalendar] = useState(false);
     const [NewDate, setNewDate] = useState(new Date());
-
+    
     const day = NewDate.getDay();   
     const optionsDay = { weekday: "long" };
     const month = NewDate.getMonth();   
@@ -26,7 +22,7 @@ function DateBox () {
 
     
 return (
-        <div>
+        <div class="font-mono bg-mediumgray">
             <div class="flex">
                 <DayBox NewDate={NewDate} day={day} optionsDay={optionsDay} onClick={() => setShowCalendar(!showCalendar)}/>
                 <DayNumber NewDate={NewDate} dayNum={dayNum}/>

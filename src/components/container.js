@@ -6,7 +6,7 @@ function Container() {
   
 
   return (
-    <a class="bg-lime-300 block max-w-sm mx-auto p-6 border border-gray-200 rounded-lg shadow" >
+    <a class="bg-palegray block max-w-sm mx-auto p-6 border border-gray-200 rounded-lg shadow" >
       <div>
         <div class="flex flex-col">
           <DateBox />
@@ -15,7 +15,7 @@ function Container() {
       </div>
     </a>
 
-    
+
   );
 }
 

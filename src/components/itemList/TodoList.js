@@ -5,7 +5,6 @@ function TodoList() {
     const [todos, setTodos] = useState([]);
 
     const addTodo = todo => {
-        debugger
         if(!todo.text || /^\s*$/.test(todo.text)) {
             return;
         }
@@ -30,13 +29,10 @@ function TodoList() {
         setTodos(removeArr);
     }
 
-
-
-
   return (
     <div style={{flex:"auto"}}>
         <div style={{flexDirection:"column", display:"flex"}}> 
-            <h1 class="text-center mb-1">Whats up today?</h1>
+            <h1 class="text-center mb-1 font-mono text-lg bg-lightblue">Whats up today?</h1>
             <TodoForm onSubmit={addTodo}/>
         </div>  
         <div>
