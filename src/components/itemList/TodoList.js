@@ -1,6 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import TodoForm from '../itemforms/TodoForm'
 import Todo from '../Todo';
+import { todosRef } from '../../Firebase';
+import Firebase from '../../Firebase';
+
 function TodoList() {
     const [todos, setTodos] = useState([]);
 
@@ -9,25 +12,51 @@ function TodoList() {
             return;
         }
 
+            todosRef.add({
+            text: todo.text,
+            isComplete: false
+          });
+
         const newTodos = [todo, ...todos]
 
         setTodos(newTodos);
-    };
-     
+        };
+        
     const updateTodo = (todoId, newValue) => {
         if(!newValue.text || /^\s*$/.test(newValue.text)) {
             return;
         }
 
-        setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
-    }
+        todosRef.doc(todoId).update({
+            text: newValue.text
+          });
+        
+          setTodos((prev) =>
+          prev.map((item) => (item.id === todoId ? newValue : item))
+        );
+      };
 
 
-    const removeTodo = id => {
-        const removeArr = [...todos].filter(todo => todo.id !== id)
+      const removeTodo = id => {
+        todosRef.doc(id).delete()
+          .then(() => {
+            const removeArr = [...todos].filter(todo => todo.id !== id)
+            setTodos(removeArr);
+          })
+          .catch((error) => {
+            console.error("Error removing document: ", error);
+          });
+      }
 
-        setTodos(removeArr);
-    }
+    useEffect(() => {
+        todosRef.onSnapshot((querySnapshot) => {
+          const items = [];
+          querySnapshot.forEach((doc) => {
+            items.push(doc.data());
+          });
+          setTodos(items);
+        });
+      }, []);
 
   return (
     <div style={{flex:"auto"}}>
@@ -41,6 +70,5 @@ function TodoList() {
     </div>
   );
 }
-
 
 export default TodoList;
