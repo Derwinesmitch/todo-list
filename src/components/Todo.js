@@ -3,7 +3,7 @@ import TodoForm from './itemforms/TodoForm';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 
-function Todo({todos, removeTodo, updateTodo}) {
+function Todo({todos, removeTodo, updateTodo, addTodo}) {
    
     const [edit, setEdit] = useState({
         id: null,
@@ -21,6 +21,11 @@ function Todo({todos, removeTodo, updateTodo}) {
             id: null,
             value: ''
         })
+    }
+
+    const submitTodo = todo => {
+        addTodo(todo)
+        setTodosState([...todosState, todo])
     }
 
     if (edit.id) {
@@ -41,7 +46,7 @@ function Todo({todos, removeTodo, updateTodo}) {
     return (
         <>
            {todosState && todosState.map((todo, index) => (
-              <div class="mt-1.5 bg-othergray flex flex-row justify-between break-all"> 
+              <div key={todo.id} class="mt-1.5 bg-othergray flex flex-row justify-between break-all"> 
                <div key={index} class=" bg-white pl-1.5" style={{width:"15.5vw"}}>
                     <div key={todo.id} class="flex">
                         <input type="checkbox" onChange={() => onChangeState(todo.id)} defaultChecked={todo.active} class="mr-2"/>
