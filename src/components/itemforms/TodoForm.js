@@ -1,4 +1,6 @@
 import React, {useState, useEffect, useRef } from 'react';
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
 function TodoForm(props) {
     const [input, setInput] = useState(props.edit ? props.edit.value : '');
@@ -15,12 +17,20 @@ function TodoForm(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
+        props.onSubmit({text: input, isComplete: false});
 
-        props.onSubmit({
-            id: Math.floor(Math.random() * 10000),
+        const db = firebase.firestore(); // Access Firestore service
+        db.collection('todos').add({
             text: input,
             active: false
+        })
+        .then((docRef) => {
+            console.log('Document written with ID: ', docRef.id);
+        })
+        .catch((error) => {
+            console.error('Error adding document: ', error);
         });
+
         setInput('');
     };
 
