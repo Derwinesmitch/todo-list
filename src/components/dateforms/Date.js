@@ -24,11 +24,11 @@ function DateBox () {
 return (
         <div class="font-mono bg-mediumgray">
             <div class="flex">
-                <DayBox NewDate={NewDate} day={day} optionsDay={optionsDay} onClick={() => setShowCalendar(!showCalendar)}/>
-                <DayNumber NewDate={NewDate} dayNum={dayNum}/>
+                <DayBox key="daybox" NewDate={NewDate} day={day} optionsDay={optionsDay} onClick={() => setShowCalendar(!showCalendar)}/>
+                <DayNumber key="daynumber" NewDate={NewDate} dayNum={dayNum}/>
             </div>
             <div>
-                <MonthBox NewDate={NewDate} month={month} optionsMonth={optionsMonth}/>
+                <MonthBox key="monthbox" NewDate={NewDate} month={month} optionsMonth={optionsMonth}/>
             </div>
                 {showCalendar && <Calendar changeDate={onChangeDate} onShowCalendar={showCalendar} NewDate={NewDate}/>}
         </div>
