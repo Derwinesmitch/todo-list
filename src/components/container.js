@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import DateBox from './dateforms/Date';
 import TodoList from './itemList/TodoList';
 function Container() {
+  const [todos, setTodos] = useState([]);
 
+  const addTodo = (newTodo) => {
+    setTodos([...todos, newTodo]);
+  };
   
 
   return (
@@ -10,7 +14,7 @@ function Container() {
       <div>
         <div class="flex flex-col">
           <DateBox />
-          <TodoList />
+          <TodoList todos={todos} onAddTodo={addTodo} />
         </div>
       </div>
     </a>
