@@ -4,7 +4,7 @@ import "firebase/compat/firestore";
 
 function TodoForm(props) {
     const [input, setInput] = useState(props.edit ? props.edit.value : '');
-
+    
     const inputRef = useRef(null)
 
     useEffect(() => {
@@ -17,20 +17,37 @@ function TodoForm(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        props.onSubmit({text: input, isComplete: false});
-
-        const db = firebase.firestore(); // Access Firestore service
-        db.collection('todos').add({
-            text: input,
-            active: false
-        })
-        .then((docRef) => {
-            console.log('Document written with ID: ', docRef.id);
-        })
-        .catch((error) => {
-            console.error('Error adding document: ', error);
-        });
-
+    
+        if (props.edit) {
+            // If we're updating an existing todo, update it in the database
+            const db = firebase.firestore();
+            db.collection('todos').doc(props.edit.id).update({
+                text: input
+            })
+            .then(() => {
+                console.log('Document updated successfully');
+                // Update the input state with the new todo value
+                setInput(input);
+            })
+            .catch((error) => {
+                console.error('Error updating document: ', error);
+            });
+        } else {
+            // If we're adding a new todo, add it to the database
+            const db = firebase.firestore();
+            db.collection('todos').add({
+                text: input,
+                active: false
+            })
+            .then((docRef) => {
+                console.log('Document written with ID: ', docRef.id);
+            })
+            .catch((error) => {
+                console.error('Error adding document: ', error);
+            });
+        }
+    
+        // Reset the input field
         setInput('');
     };
 
