@@ -23,10 +23,10 @@ function Todo({todos, removeTodo, updateTodo, addTodo}) {
         })
     }
 
-    const submitTodo = todo => {
-        addTodo(todo)
-        setTodosState([...todosState, todo])
-    }
+    // const submitTodo = todo => {
+    //     addTodo(todo)
+    //     setTodosState([...todosState, todo])
+    // }
 
     if (edit.id) {
         return <TodoForm edit={edit} onSubmit={submitUpdate}/>;
@@ -63,4 +63,4 @@ function Todo({todos, removeTodo, updateTodo, addTodo}) {
      );
 }
 
-export default Todo
+export default Todo;
