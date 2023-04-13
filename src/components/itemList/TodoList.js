@@ -10,27 +10,6 @@ function TodoList() {
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
     }
-
-    // todosRef
-    //   .add({
-    //     text: todo.text,
-    //     isComplete: false,
-    //   })
-    //   .then((docRef) => {
-    //     const newTodo = {
-    //       id: docRef.id,
-    //       text: todo.text,
-    //       isComplete: false,
-    //     };
-    //     setTodos((prevTodos) =>
-    //       prevTodos.some((prevTodo) => prevTodo.text === todo.text && prevTodo.id === newTodo.id)
-    //         ? prevTodos
-    //         : [...prevTodos, newTodo]
-    //     );
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error adding document: ", error);
-    //   });
   };
 
   const updateTodo = (todoId, newValue) => {
