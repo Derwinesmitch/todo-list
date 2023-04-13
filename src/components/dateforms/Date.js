@@ -14,9 +14,9 @@ function DateBox () {
     const optionsMonth = { month: "long" };
     const dayNum = NewDate.getDate();
 
-    const onChangeDate = (NewStartDate) => {
-        console.log (NewStartDate)
-        setNewDate(NewStartDate)
+    const onChangeDate = (newStartDate) => {
+        console.log (newStartDate)
+        setNewDate(newStartDate)
 
     }
 
