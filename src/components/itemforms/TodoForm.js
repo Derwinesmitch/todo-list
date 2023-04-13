@@ -4,7 +4,6 @@ import "firebase/compat/firestore";
 
 function TodoForm(props) {
     const [input, setInput] = useState(props.edit ? props.edit.value : '');
-    
     const inputRef = useRef(null)
 
     useEffect(() => {
@@ -17,7 +16,9 @@ function TodoForm(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
-    
+
+        const currentDate = new Date();
+
         if (props.edit) {
             // If we're updating an existing todo, update it in the database
             const db = firebase.firestore();
@@ -37,7 +38,9 @@ function TodoForm(props) {
             const db = firebase.firestore();
             db.collection('todos').add({
                 text: input,
-                active: false
+                active: false,
+                date: currentDate,
+
             })
             .then((docRef) => {
                 console.log('Document written with ID: ', docRef.id);
@@ -47,7 +50,6 @@ function TodoForm(props) {
             });
         }
     
-        // Reset the input field
         setInput('');
     };
 
