@@ -23,11 +23,6 @@ function Todo({todos, removeTodo, updateTodo, addTodo}) {
         })
     }
 
-    // const submitTodo = todo => {
-    //     addTodo(todo)
-    //     setTodosState([...todosState, todo])
-    // }
-
     if (edit.id) {
         return <TodoForm edit={edit} onSubmit={submitUpdate}/>;
     } 
@@ -53,7 +48,7 @@ function Todo({todos, removeTodo, updateTodo, addTodo}) {
                     {todo.text}
                     </div>
                 </div>  
-                <div class="mt-1.5 bg-white flex items-center bg-paleorange" >
+                <div class="bg-white flex items-center bg-paleorange" >
                     <TiEdit onClick={() => setEdit({ id: todo.id, value: todo.text})} class="mx-1.5"/>
                     <RiCloseCircleLine onClick={() => removeTodo(todo.id)} class="mx-1.5"    />
                 </div>
