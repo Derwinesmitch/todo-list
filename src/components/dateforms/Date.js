@@ -4,7 +4,7 @@ import DayBox from './DateDay';
 import DayNumber from './DateNumber';
 import Calendar from './DatePicker';
 import DateContext from '../../context/DateContext';
-
+import DropMenu from '../dropdown/Dropdown';
 function DateBox () {
     const { startDate, setStartDate } = useContext(DateContext);
     const [showCalendar, setShowCalendar] = useState(false);
@@ -23,15 +23,20 @@ function DateBox () {
 
     return (
             
-            <div class="font-mono bg-mediumgray">
+            <div class="font-mono bg-mediumgray flex flex-row justify-between">
+               <div class="flex flex-col ">
+                    <div class="flex">
+                        <DayBox key="daybox" NewDate={NewDate} day={day} optionsDay={optionsDay} onClick={() => setShowCalendar(!showCalendar)}/>
+                        <DayNumber key="daynumber" NewDate={NewDate} dayNum={dayNum}/>
+                    </div>
+                    <div class="flex">
+                        <MonthBox key="monthbox" NewDate={NewDate} month={month} optionsMonth={optionsMonth}/>
+                    </div>
+                        {showCalendar && <Calendar changeDate={onChangeDate} onShowCalendar={showCalendar} NewDate={NewDate}/>}
+                </div> 
                 <div class="flex">
-                    <DayBox key="daybox" NewDate={NewDate} day={day} optionsDay={optionsDay} onClick={() => setShowCalendar(!showCalendar)}/>
-                    <DayNumber key="daynumber" NewDate={NewDate} dayNum={dayNum}/>
+                    <DropMenu />
                 </div>
-                <div>
-                    <MonthBox key="monthbox" NewDate={NewDate} month={month} optionsMonth={optionsMonth}/>
-                </div>
-                    {showCalendar && <Calendar changeDate={onChangeDate} onShowCalendar={showCalendar} NewDate={NewDate}/>}
             </div>
   );
 }
