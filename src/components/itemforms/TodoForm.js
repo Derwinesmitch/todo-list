@@ -20,7 +20,7 @@ function TodoForm(props) {
         e.preventDefault();
 
         const currentDate = new Date();
-        const startDate = ctx.startDate;
+        const startDate = ctx.startDate || currentDate;
 
         if (props.edit) {
             // If we're updating an existing todo, update it in the database
