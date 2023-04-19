@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import Container from './components/Container';
+import DateContext from './context/DateContext';
 
 function App() {
 
+  const [startDate, setStartDate] = useState('');
+
   return (
-    <div>
-      <Container />
-    </div>
+    <DateContext.Provider
+      value={{
+        startDate,
+        setStartDate
+      }}>
+      <div>
+        <Container />
+      </div>    
+    </DateContext.Provider>
   );
 }
 
