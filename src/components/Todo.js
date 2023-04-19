@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import TodoForm from './itemforms/TodoForm';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
-
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 function Todo({todos, removeTodo, updateTodo, addTodo}) {
    
     const [edit, setEdit] = useState({
@@ -28,15 +29,27 @@ function Todo({todos, removeTodo, updateTodo, addTodo}) {
     } 
 
     const onChangeState = (id) => {
-
-    todosState.map(e => {
-        if(e.id===id) {
-            e.active=!e.active
-        }
-    })
-    
-    setTodosState(todosState)
-    }
+        const updatedTodos = todosState.map((e) => {
+          if (e.id === id) {
+            const updatedTodo = { ...e, active: !e.active };
+            // Update the todo in the database
+            const db = firebase.firestore();
+            db.collection("todos")
+              .doc(e.id)
+              .update({ active: updatedTodo.active })
+              .then(() => {
+                console.log("Document updated successfully");
+              })
+              .catch((error) => {
+                console.error("Error updating document: ", error);
+              });
+            return updatedTodo;
+          } else {
+            return e;
+          }
+        });
+        setTodosState(updatedTodos);
+      };
     
     return (
         <>
