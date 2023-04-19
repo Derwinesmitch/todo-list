@@ -1,8 +1,10 @@
-import React, {useState, useEffect, useRef } from 'react';
+import React, {useState, useEffect, useRef, useContext } from 'react';
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import DateContext from '../../context/DateContext';
 
 function TodoForm(props) {
+    const ctx = useContext(DateContext)
     const [input, setInput] = useState(props.edit ? props.edit.value : '');
     const inputRef = useRef(null)
 
@@ -18,6 +20,7 @@ function TodoForm(props) {
         e.preventDefault();
 
         const currentDate = new Date();
+        const startDate = ctx.startDate;
 
         if (props.edit) {
             // If we're updating an existing todo, update it in the database
@@ -40,7 +43,7 @@ function TodoForm(props) {
                 text: input,
                 active: false,
                 date: currentDate,
-
+                startDate: startDate
             })
             .then((docRef) => {
                 console.log('Document written with ID: ', docRef.id);
