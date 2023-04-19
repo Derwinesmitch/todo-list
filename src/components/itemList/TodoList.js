@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import TodoForm from '../itemforms/TodoForm';
 import Todo from '../Todo';
 import { todosRef } from '../../Firebase';
+import DateContext from '../../context/DateContext';
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
+  const { startDate } = useContext(DateContext);
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -43,13 +45,17 @@ function TodoList() {
     const unsubscribe = todosRef.onSnapshot((querySnapshot) => {
       const items = [];
       querySnapshot.forEach((doc) => {
-        items.push({ id: doc.id, ...doc.data() });
+        const todoDate = new Date(doc.data().startDate.toDate().toDateString());
+        const selectedDate = new Date(startDate.toDateString());
+        if (todoDate.getTime() === selectedDate.getTime()) {
+          items.push({ id: doc.id, ...doc.data() });
+        }
       });
       setTodos(items);
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [startDate]);
 
   return (
     <div style={{ flex: 'auto' }}>
