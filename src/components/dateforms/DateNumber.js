@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 function DayNumber ({NewDate, dayNum}) {
 
-        
 
-return (
-    <div >
-        {dayNum}
-        
-    </div>
-  );
-}
+
+    return (
+        <div>
+            {dayNum}
+        </div>
+      );
+    }
 
 
 export default DayNumber;
