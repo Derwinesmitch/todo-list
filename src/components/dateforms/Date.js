@@ -4,7 +4,6 @@ import DayBox from './DateDay';
 import DayNumber from './DateNumber';
 import Calendar from './DatePicker';
 import DateContext from '../../context/DateContext';
-import DropMenu from '../dropdown/Dropdown';
 function DateBox () {
     const { startDate, setStartDate } = useContext(DateContext);
     const [showCalendar, setShowCalendar] = useState(false);
@@ -34,9 +33,6 @@ function DateBox () {
                     </div>
                         {showCalendar && <Calendar changeDate={onChangeDate} onShowCalendar={showCalendar} NewDate={NewDate}/>}
                 </div> 
-                <div class="flex">
-                    <DropMenu />
-                </div>
             </div>
   );
 }
