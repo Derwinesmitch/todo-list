@@ -6,8 +6,10 @@ import DateContext from '../../context/DateContext';
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
+  const [showPending, setShowPending] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(false);
   const { startDate } = useContext(DateContext);
-
+  const today = new Date();
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
@@ -44,18 +46,24 @@ function TodoList() {
   useEffect(() => {
     const unsubscribe = todosRef.onSnapshot((querySnapshot) => {
       const items = [];
-      querySnapshot.forEach((doc) => {
-        const todoDate = new Date(doc.data().startDate.toDate().toDateString());
-        const selectedDate = new Date(startDate.toDateString());
-        if (todoDate.getTime() === selectedDate.getTime()) {
-          items.push({ id: doc.id, ...doc.data() });
-        }
-      });
+        querySnapshot.forEach((doc) => {
+            if (showPending && doc.data().active === false){
+            items.push({ id: doc.id, ...doc.data() });
+          } else if (showCompleted && doc.data().active === true) {
+            items.push({ id: doc.id, ...doc.data() });
+          } else if (!showPending && !showCompleted) {
+            const todoDate = new Date(doc.data().startDate.toDate().toDateString());
+            const selectedDate = new Date(startDate.toDateString());
+            if (todoDate.getTime() === selectedDate.getTime() && todoDate.getTime() !== today.getTime()) {
+              items.push({ id: doc.id, ...doc.data() });
+          }
+          }
+        });
       setTodos(items);
     });
 
     return () => unsubscribe();
-  }, [startDate]);
+  }, [startDate, showPending, showCompleted]);
 
   return (
     <div style={{ flex: 'auto' }}>
@@ -63,6 +71,30 @@ function TodoList() {
         <h1 className="text-center mb-1 font-mono text-lg bg-lightblue">
           What's up today?
         </h1>
+        <div style={{ display: 'flex', marginBottom: '1rem' }}>
+          <label style={{ marginRight: '1rem' }}>
+            <input
+              type="checkbox"
+              checked={showPending}
+              onChange={(e) => {
+                setShowPending(e.target.checked);
+                setShowCompleted(false);
+              }}
+            />{' '}
+            Show all pending
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={showCompleted}
+              onChange={(e) => {
+                setShowCompleted(e.target.checked);
+                setShowPending(false);
+              }}
+            />{' '}
+            Show all completed
+          </label>
+        </div>
         <TodoForm onSubmit={addTodo} />
       </div>
       <div>
