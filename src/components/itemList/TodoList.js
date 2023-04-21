@@ -57,6 +57,10 @@ function TodoList() {
             if (todoDate.getTime() === selectedDate.getTime() && todoDate.getTime() !== today.getTime()) {
               items.push({ id: doc.id, ...doc.data() });
           }
+          } else if (!showPending && !showCompleted){
+            if (doc.data().active === true) {
+              items.push({ id: doc.id, ...doc.data() });
+            }
           }
         });
       setTodos(items);
